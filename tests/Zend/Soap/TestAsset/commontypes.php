@@ -26,7 +26,7 @@ function Zend_Soap_TestAsset_TestFunc($who)
  */
 function Zend_Soap_TestAsset_TestFunc2()
 {
-    return "Hello World";
+    return 'Hello World';
 }
 
 /**
@@ -66,7 +66,7 @@ function Zend_Soap_TestAsset_TestFunc5()
  */
 function Zend_Soap_TestAsset_TestFunc6()
 {
-    return "string";
+    return 'string';
 }
 
 /**
@@ -117,9 +117,8 @@ class Zend_Soap_TestAsset_TestFixingMultiplePrototypes
      * @param integer $d
      * @return integer
      */
-    public function testFunc($a=100, $b=200, $d=300)
+    public function testFunc($a = 100, $b = 200, $d = 300)
     {
-
     }
 }
 
@@ -137,7 +136,7 @@ class Zend_Soap_TestAsset_Test
      */
     public function testFunc1()
     {
-        return "Hello World";
+        return 'Hello World';
     }
 
     /**
@@ -184,7 +183,7 @@ class Zend_Soap_TestAsset_AutoDiscoverTestClass1
     /**
      * @var string $param
      */
-    public $param = "hello";
+    public $param = 'hello';
 }
 
 /**
@@ -220,7 +219,6 @@ class Zend_Soap_TestAsset_AutoDiscoverTestClass2
      */
     public function addMultiple($test)
     {
-
     }
 }
 
@@ -282,7 +280,7 @@ class Zend_Soap_TestAsset_ComplexObjectStructure
     /**
      * @var string
      */
-    public $string = "Hello World";
+    public $string = 'Hello World';
 
     /**
      * @var int
@@ -406,7 +404,9 @@ class Zend_Soap_TestAsset_Recursion
     /**
      * @return Zend_Soap_TestAsset_Recursion
      */
-    public function create() {}
+    public function create()
+    {
+    }
 }
 
 /**
@@ -414,7 +414,6 @@ class Zend_Soap_TestAsset_Recursion
  */
 function Zend_Soap_TestAsset_OneWay($message)
 {
-
 }
 
 /**
@@ -430,7 +429,6 @@ class Zend_Soap_TestAsset_NoReturnType
      */
     public function pushOneWay($message)
     {
-
     }
 }
 
@@ -445,7 +443,7 @@ class Zend_Soap_TestAsset_TestClass
      */
     public function testFunc1()
     {
-        return "Hello World";
+        return 'Hello World';
     }
 
     /**
@@ -490,14 +488,14 @@ class Zend_Soap_TestAsset_TestData1
      *
      * @var string
      */
-     public $property1;
+    public $property1;
 
     /**
      * Property2
      *
      * @var float
      */
-     public $property2;
+    public $property2;
 }
 
 /** Test class 2 */
@@ -508,14 +506,14 @@ class Zend_Soap_TestAsset_TestData2
      *
      * @var integer
      */
-     public $property1;
+    public $property1;
 
     /**
      * Property1
      *
      * @var float
      */
-     public $property2;
+    public $property2;
 }
 
 class Zend_Soap_TestAsset_MockSoapServer
@@ -525,7 +523,9 @@ class Zend_Soap_TestAsset_MockSoapServer
     {
         $this->handle = func_get_args();
     }
-    public function __call($name, $args) {}
+    public function __call($name, $args)
+    {
+    }
 }
 
 class Zend_Soap_TestAsset_MockServer extends Zend_Soap_Server
@@ -549,7 +549,7 @@ class Zend_Soap_TestAsset_ServerTestClass
      */
     public function testFunc1()
     {
-        return "Hello World";
+        return 'Hello World';
     }
 
     /**
@@ -592,43 +592,42 @@ class Zend_Soap_TestAsset_ServerTestClass
      */
     public function testFunc5()
     {
-        trigger_error("Test Message", E_USER_ERROR);
+        trigger_error('Test Message', E_USER_ERROR);
     }
 }
 
 if (extension_loaded('soap')) {
 
 /** Local SOAP client */
-class Zend_Soap_TestAsset_TestLocalSoapClient extends SoapClient
-{
-    /**
-     * Server object
-     *
-     * @var Zend_Soap_Server
-     */
-    public $server;
-
-    /**
-     * Local client constructor
-     *
-     * @param Zend_Soap_Server $server
-     * @param string $wsdl
-     * @param array $options
-     */
-    public function __construct(Zend_Soap_Server $server, $wsdl, $options)
+    class Zend_Soap_TestAsset_TestLocalSoapClient extends SoapClient
     {
-        $this->server = $server;
-        parent::__construct($wsdl, $options);
+        /**
+         * Server object
+         *
+         * @var Zend_Soap_Server
+         */
+        public $server;
+
+        /**
+         * Local client constructor
+         *
+         * @param Zend_Soap_Server $server
+         * @param string $wsdl
+         * @param array $options
+         */
+        public function __construct(Zend_Soap_Server $server, $wsdl, $options)
+        {
+            $this->server = $server;
+            parent::__construct($wsdl, $options);
+        }
+
+        public function __doRequest($request, $location, $action, $version, $one_way = 0)
+        {
+            ob_start();
+            $this->server->handle($request);
+            $response = ob_get_clean();
+
+            return $response;
+        }
     }
-
-    public function __doRequest($request, $location, $action, $version, $one_way = 0)
-    {
-        ob_start();
-        $this->server->handle($request);
-        $response = ob_get_clean();
-
-        return $response;
-    }
-}
-
 }

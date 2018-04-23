@@ -20,9 +20,9 @@
  * @version    $Id$
  */
 
-require_once "Zend/Soap/AutoDiscover.php";
-require_once "Zend/Soap/Server.php";
-require_once "Zend/Soap/Wsdl/Strategy/ArrayOfTypeComplex.php";
+require_once 'Zend/Soap/AutoDiscover.php';
+require_once 'Zend/Soap/Server.php';
+require_once 'Zend/Soap/Wsdl/Strategy/ArrayOfTypeComplex.php';
 
 /**
  * @category   Zend
@@ -41,14 +41,14 @@ class Zend_Soap_Service_Server1
     {
         $a = new Zend_Soap_Wsdl_ComplexTypeA();
 
-        $b1 = new Zend_Soap_Wsdl_ComplexTypeB();
-        $b1->bar = "bar";
-        $b1->foo = "bar";
+        $b1       = new Zend_Soap_Wsdl_ComplexTypeB();
+        $b1->bar  = 'bar';
+        $b1->foo  = 'bar';
         $a->baz[] = $b1;
 
-        $b2 = new Zend_Soap_Wsdl_ComplexTypeB();
-        $b2->bar = "foo";
-        $b2->foo = "foo";
+        $b2       = new Zend_Soap_Wsdl_ComplexTypeB();
+        $b2->bar  = 'foo';
+        $b2->foo  = 'foo';
         $a->baz[] = $b2;
 
         $a->baz[] = $request;
@@ -91,10 +91,10 @@ class Zend_Soap_Wsdl_ComplexTypeA
     public $baz = array();
 }
 
-if(isset($_GET['wsdl'])) {
+if (isset($_GET['wsdl'])) {
     $server = new Zend_Soap_AutoDiscover(new Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex());
 } else {
-    $uri = "http://".$_SERVER['HTTP_HOST']."/".$_SERVER['PHP_SELF']."?wsdl";
+    $uri    = 'http://' . $_SERVER['HTTP_HOST'] . '/' . $_SERVER['PHP_SELF'] . '?wsdl';
     $server = new Zend_Soap_Server($uri);
 }
 $server->setClass('Zend_Soap_Service_Server1');

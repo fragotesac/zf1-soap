@@ -29,5 +29,5 @@
  * @version    $Id$
  */
 class Zend_Soap_Server_Exception extends Zend_Exception
-{}
-
+{
+}

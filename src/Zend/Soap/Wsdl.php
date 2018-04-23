@@ -106,13 +106,13 @@ class Zend_Soap_Wsdl
         if ($uri instanceof Zend_Uri_Http) {
             $uri = $uri->getUri();
         }
-        $oldUri = $this->_uri;
+        $oldUri     = $this->_uri;
         $this->_uri = $uri;
 
-        if($this->_dom !== null) {
+        if ($this->_dom !== null) {
             // @todo: This is the worst hack ever, but its needed due to design and non BC issues of WSDL generation
-            $xml = $this->_dom->saveXML();
-            $xml = str_replace($oldUri, $uri, $xml);
+            $xml        = $this->_dom->saveXML();
+            $xml        = str_replace($oldUri, $uri, $xml);
             $this->_dom = new DOMDocument();
             $this->_dom = Zend_Xml_Security::scan($xml, $this->_dom);
         }
@@ -129,21 +129,24 @@ class Zend_Soap_Wsdl
      */
     public function setComplexTypeStrategy($strategy)
     {
-        if($strategy === true) {
+        if ($strategy === true) {
             $strategy = new Zend_Soap_Wsdl_Strategy_DefaultComplexType();
-        } else if($strategy === false) {
+        } elseif ($strategy === false) {
             $strategy = new Zend_Soap_Wsdl_Strategy_AnyType();
-        } else if(is_string($strategy)) {
-            if(class_exists($strategy)) {
+        } elseif (is_string($strategy)) {
+            if (class_exists($strategy)) {
                 $strategy = new $strategy();
             } else {
                 throw new Zend_Soap_Wsdl_Exception(
-                    sprintf("Strategy with name '%s does not exist.", $strategy
-                ));
+                    sprintf(
+                        "Strategy with name '%s does not exist.",
+                        $strategy
+                )
+                );
             }
         }
 
-        if(!($strategy instanceof Zend_Soap_Wsdl_Strategy_Interface)) {
+        if (!($strategy instanceof Zend_Soap_Wsdl_Strategy_Interface)) {
             throw new Zend_Soap_Wsdl_Exception("Set a strategy that is not of type 'Zend_Soap_Wsdl_Strategy_Interface'");
         }
         $this->_strategy = $strategy;
@@ -232,7 +235,7 @@ class Zend_Soap_Wsdl
             $operation->appendChild($node);
         }
         if (is_string($output) && (strlen(trim($output)) >= 1)) {
-            $node= $this->_dom->createElement('output');
+            $node = $this->_dom->createElement('output');
             $node->setAttribute('message', $output);
             $operation->appendChild($node);
         }
@@ -280,7 +283,7 @@ class Zend_Soap_Wsdl
         $operation->setAttribute('name', $name);
 
         if (is_array($input)) {
-            $node = $this->_dom->createElement('input');
+            $node      = $this->_dom->createElement('input');
             $soap_node = $this->_dom->createElement('soap:body');
             foreach ($input as $name => $value) {
                 $soap_node->setAttribute($name, $value);
@@ -290,7 +293,7 @@ class Zend_Soap_Wsdl
         }
 
         if (is_array($output)) {
-            $node = $this->_dom->createElement('output');
+            $node      = $this->_dom->createElement('output');
             $soap_node = $this->_dom->createElement('soap:body');
             foreach ($output as $name => $value) {
                 $soap_node->setAttribute($name, $value);
@@ -413,11 +416,11 @@ class Zend_Soap_Wsdl
             $node = $input_node;
         }
 
-        $doc = $this->_dom->createElement('documentation');
+        $doc       = $this->_dom->createElement('documentation');
         $doc_cdata = $this->_dom->createTextNode(str_replace(array("\r\n", "\r"), "\n", $documentation));
         $doc->appendChild($doc_cdata);
 
-        if($node->hasChildNodes()) {
+        if ($node->hasChildNodes()) {
             $node->insertBefore($doc, $node->firstChild);
         } else {
             $node->appendChild($doc);
@@ -436,7 +439,7 @@ class Zend_Soap_Wsdl
         if ($types instanceof DOMDocument) {
             $dom = $this->_dom->importNode($types->documentElement);
             $this->_wsdl->appendChild($types->documentElement);
-        } elseif ($types instanceof DOMNode || $types instanceof DOMElement || $types instanceof DOMDocumentFragment ) {
+        } elseif ($types instanceof DOMNode || $types instanceof DOMElement || $types instanceof DOMDocumentFragment) {
             $dom = $this->_dom->importNode($types);
             $this->_wsdl->appendChild($dom);
         }
@@ -450,7 +453,7 @@ class Zend_Soap_Wsdl
      */
     public function addType($type)
     {
-        if(!in_array($type, $this->_includedTypes)) {
+        if (!in_array($type, $this->_includedTypes)) {
             $this->_includedTypes[] = $type;
         }
         return $this;
@@ -473,7 +476,7 @@ class Zend_Soap_Wsdl
      */
     public function getSchema()
     {
-        if($this->_schema == null) {
+        if ($this->_schema == null) {
             $this->addSchemaTypeSection();
         }
 
@@ -487,7 +490,7 @@ class Zend_Soap_Wsdl
      */
     public function toXML()
     {
-           return $this->_dom->saveXML();
+        return $this->_dom->saveXML();
     }
 
     /**
@@ -643,7 +646,7 @@ class Zend_Soap_Wsdl
      */
     public function addElement($element)
     {
-        $schema = $this->getSchema();
+        $schema     = $this->getSchema();
         $elementXml = $this->_parseElement($element);
         $schema->appendChild($elementXml);
         return 'tns:' . $element['name'];

@@ -39,14 +39,15 @@ class Zend_Soap_Wsdl_Strategy_DefaultComplexType extends Zend_Soap_Wsdl_Strategy
      */
     public function addComplexType($type)
     {
-        if(!class_exists($type)) {
+        if (!class_exists($type)) {
             throw new Zend_Soap_Wsdl_Exception(sprintf(
-                "Cannot add a complex type %s that is not an object or where ".
-                "class could not be found in 'DefaultComplexType' strategy.", $type
+                'Cannot add a complex type %s that is not an object or where ' .
+                "class could not be found in 'DefaultComplexType' strategy.",
+                $type
             ));
         }
 
-        $dom = $this->getContext()->toDomDocument();
+        $dom   = $this->getContext()->toDomDocument();
         $class = new ReflectionClass($type);
 
         $defaultProperties = $class->getDefaultProperties();

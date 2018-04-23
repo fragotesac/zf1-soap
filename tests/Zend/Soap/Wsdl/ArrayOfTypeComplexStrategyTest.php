@@ -20,13 +20,7 @@
  * @version    $Id$
  */
 
-require_once dirname(__FILE__)."/../_files/commontypes.php";
-
-/** Zend_Soap_Wsdl */
-require_once 'Zend/Soap/Wsdl.php';
-
-/** Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex */
-require_once 'Zend/Soap/Wsdl/Strategy/ArrayOfTypeComplex.php';
+require_once dirname(__FILE__) . '/../_files/commontypes.php';
 
 /**
  * @category   Zend
@@ -45,26 +39,19 @@ class Zend_Soap_Wsdl_ArrayOfTypeComplexStrategyTest extends PHPUnit\Framework\Te
     public function setUp()
     {
         $this->strategy = new Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex();
-        $this->wsdl = new Zend_Soap_Wsdl('MyService', 'http://localhost/MyService.php', $this->strategy);
+        $this->wsdl     = new Zend_Soap_Wsdl('MyService', 'http://localhost/MyService.php', $this->strategy);
     }
 
     public function testNestingObjectsDeepMakesNoSenseThrowingException()
     {
-        try {
-            $this->wsdl->addComplexType('Zend_Soap_Wsdl_ComplexTest[][]');
-            $this->fail();
-        } catch(Zend_Soap_Wsdl_Exception $e) {
-
-        }
+        $this->expectException(Zend_Soap_Wsdl_Exception::class);
+        $this->wsdl->addComplexType('Zend_Soap_Wsdl_ComplexTest[][]');
     }
 
     public function testAddComplexTypeOfNonExistingClassThrowsException()
     {
-        try {
-            $this->wsdl->addComplexType('Zend_Soap_Wsdl_UnknownClass[]');
-        } catch(Zend_Soap_Wsdl_Exception $e) {
-
-        }
+        $this->expectException(Zend_Soap_Wsdl_Exception::class);
+        $this->wsdl->addComplexType('Zend_Soap_Wsdl_UnknownClass[]');
     }
 
     /**
@@ -73,7 +60,7 @@ class Zend_Soap_Wsdl_ArrayOfTypeComplexStrategyTest extends PHPUnit\Framework\Te
     public function testArrayOfSimpleObject()
     {
         $return = $this->wsdl->addComplexType('Zend_Soap_Wsdl_ComplexTest[]');
-        $this->assertEquals("tns:ArrayOfZend_Soap_Wsdl_ComplexTest", $return);
+        $this->assertEquals('tns:ArrayOfZend_Soap_Wsdl_ComplexTest', $return);
 
         $wsdl = $this->wsdl->toXML();
 
@@ -91,7 +78,7 @@ class Zend_Soap_Wsdl_ArrayOfTypeComplexStrategyTest extends PHPUnit\Framework\Te
     public function testThatOverridingStrategyIsReset()
     {
         $return = $this->wsdl->addComplexType('Zend_Soap_Wsdl_ComplexTest[]');
-        $this->assertEquals("tns:ArrayOfZend_Soap_Wsdl_ComplexTest", $return);
+        $this->assertEquals('tns:ArrayOfZend_Soap_Wsdl_ComplexTest', $return);
         #$this->assertTrue($this->wsdl->getComplexTypeStrategy() instanceof Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplexStrategy);
 
         $wsdl = $this->wsdl->toXML();
@@ -103,7 +90,7 @@ class Zend_Soap_Wsdl_ArrayOfTypeComplexStrategyTest extends PHPUnit\Framework\Te
     public function testArrayOfComplexObjects()
     {
         $return = $this->wsdl->addComplexType('Zend_Soap_Wsdl_ComplexObjectStructure[]');
-        $this->assertEquals("tns:ArrayOfZend_Soap_Wsdl_ComplexObjectStructure", $return);
+        $this->assertEquals('tns:ArrayOfZend_Soap_Wsdl_ComplexObjectStructure', $return);
 
         $wsdl = $this->wsdl->toXML();
 
@@ -121,7 +108,7 @@ class Zend_Soap_Wsdl_ArrayOfTypeComplexStrategyTest extends PHPUnit\Framework\Te
     public function testArrayOfObjectWithObject()
     {
         $return = $this->wsdl->addComplexType('Zend_Soap_Wsdl_ComplexObjectWithObjectStructure[]');
-        $this->assertEquals("tns:ArrayOfZend_Soap_Wsdl_ComplexObjectWithObjectStructure", $return);
+        $this->assertEquals('tns:ArrayOfZend_Soap_Wsdl_ComplexObjectWithObjectStructure', $return);
 
         $wsdl = $this->wsdl->toXML();
 
@@ -151,13 +138,16 @@ class Zend_Soap_Wsdl_ArrayOfTypeComplexStrategyTest extends PHPUnit\Framework\Te
 
         $wsdl = $this->wsdl->toXML();
 
-        $this->assertEquals(1,
+        $this->assertEquals(
+            1,
             substr_count($wsdl, 'wsdl:arrayType="tns:Zend_Soap_Wsdl_ComplexObjectWithObjectStructure[]"')
         );
-        $this->assertEquals(1,
+        $this->assertEquals(
+            1,
             substr_count($wsdl, '<xsd:complexType name="ArrayOfZend_Soap_Wsdl_ComplexObjectWithObjectStructure">')
         );
-        $this->assertEquals(1,
+        $this->assertEquals(
+            1,
             substr_count($wsdl, '<xsd:complexType name="Zend_Soap_Wsdl_ComplexTest">')
         );
     }
@@ -172,27 +162,31 @@ class Zend_Soap_Wsdl_ArrayOfTypeComplexStrategyTest extends PHPUnit\Framework\Te
 
         $wsdl = $this->wsdl->toXML();
 
-        $this->assertEquals(1,
+        $this->assertEquals(
+            1,
             substr_count($wsdl, 'wsdl:arrayType="tns:Zend_Soap_Wsdl_ComplexObjectWithObjectStructure[]"')
         );
-        $this->assertEquals(1,
+        $this->assertEquals(
+            1,
             substr_count($wsdl, '<xsd:complexType name="ArrayOfZend_Soap_Wsdl_ComplexObjectWithObjectStructure">')
         );
-        $this->assertEquals(1,
+        $this->assertEquals(
+            1,
             substr_count($wsdl, '<xsd:complexType name="Zend_Soap_Wsdl_ComplexTest">')
         );
     }
 
     /**
      * @group ZF-5149
+     * @doesNotPerformAssertions
      */
     public function testArrayOfComplexNestedObjectsIsCoveredByStrategyAndNotThrowingException()
     {
         try {
-            $return = $this->wsdl->addComplexType("Zend_Soap_Wsdl_ComplexTypeA");
-            $wsdl = $this->wsdl->toXml();
-        } catch(Exception $e) {
-            $this->fail("Adding object with nested structure should not throw exception.");
+            $return = $this->wsdl->addComplexType('Zend_Soap_Wsdl_ComplexTypeA');
+            $wsdl   = $this->wsdl->toXml();
+        } catch (Exception $e) {
+            $this->fail('Adding object with nested structure should not throw exception.');
         }
     }
 
@@ -201,18 +195,21 @@ class Zend_Soap_Wsdl_ArrayOfTypeComplexStrategyTest extends PHPUnit\Framework\Te
      */
     public function testArrayOfComplexNestedObjectsIsCoveredByStrategyAndAddsAllTypesRecursivly()
     {
-        $return = $this->wsdl->addComplexType("Zend_Soap_Wsdl_ComplexTypeA");
-        $wsdl = $this->wsdl->toXml();
+        $return = $this->wsdl->addComplexType('Zend_Soap_Wsdl_ComplexTypeA');
+        $wsdl   = $this->wsdl->toXml();
 
-        $this->assertEquals(1,
+        $this->assertEquals(
+            1,
             substr_count($wsdl, '<xsd:complexType name="Zend_Soap_Wsdl_ComplexTypeA">'),
             'No definition of complex type A found.'
         );
-        $this->assertEquals(1,
+        $this->assertEquals(
+            1,
             substr_count($wsdl, '<xsd:complexType name="ArrayOfZend_Soap_Wsdl_ComplexTypeB">'),
             'No definition of complex type B array found.'
         );
-        $this->assertEquals(1,
+        $this->assertEquals(
+            1,
             substr_count($wsdl, 'wsdl:arrayType="tns:Zend_Soap_Wsdl_ComplexTypeB[]"'),
             'No usage of Complex Type B array found.'
         );
@@ -221,9 +218,10 @@ class Zend_Soap_Wsdl_ArrayOfTypeComplexStrategyTest extends PHPUnit\Framework\Te
     /**
      * @group ZF-5754
      * @group ZF-8948
+     * @doesNotPerformAssertions
      */
     public function testNestingOfSameTypesDoesNotLeadToInfiniteRecursionButWillThrowException()
     {
-        $return = $this->wsdl->addComplexType("Zend_Soap_AutoDiscover_Recursion");
+        $return = $this->wsdl->addComplexType('Zend_Soap_AutoDiscover_Recursion');
     }
 }

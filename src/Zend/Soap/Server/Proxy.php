@@ -33,16 +33,16 @@ class Zend_Soap_Server_Proxy
     /**
      * Constructor
      */
-    public function  __construct($className, $classArgs = array())
+    public function __construct($className, $classArgs = array())
     {
-        $class = new ReflectionClass($className);
+        $class       = new ReflectionClass($className);
         $constructor = $class->getConstructor();
-	if ($constructor === null) {
+        if ($constructor === null) {
             $this->_classInstance = $class->newInstance();
-	} else {
+        } else {
             $this->_classInstance = $class->newInstanceArgs($classArgs);
-	}
-	$this->_className = $className;
+        }
+        $this->_className = $className;
     }
     /**
      * Proxy for the WS-I compliant call
@@ -54,7 +54,7 @@ class Zend_Soap_Server_Proxy
     public function __call($name, $arguments)
     {
         $result = call_user_func_array(array($this->_classInstance, $name), $this->_preProcessArguments($arguments));
-        return array("{$name}Result"=>$result);
+        return array("{$name}Result" => $result);
     }
     /**
      *  Pre process arguments
@@ -66,8 +66,8 @@ class Zend_Soap_Server_Proxy
     {
         if (count($arguments) == 1 && is_object($arguments[0])) {
             return get_object_vars($arguments[0]);
-	} else {
+        } else {
             return $arguments;
-	}
+        }
     }
 }
