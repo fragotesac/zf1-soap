@@ -294,7 +294,7 @@ class Zend_Soap_ClientTest extends PHPUnit\Framework\TestCase
     {
         // Remove the following line when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 

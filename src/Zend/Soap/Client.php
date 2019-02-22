@@ -1121,10 +1121,10 @@ class Zend_Soap_Client
         $soapHeaders = array_merge($this->_permanentSoapInputHeaders, $this->_soapInputHeaders);
         $result      = $soapClient->__soapCall(
             $name,
-                                                 $this->_preProcessArguments($arguments),
-                                                 null, /* Options are already set to the SOAP client object */
+            $this->_preProcessArguments($arguments),
+            null, /* Options are already set to the SOAP client object */
                                                  (count($soapHeaders) > 0)? $soapHeaders : null,
-                                                 $this->_soapOutputHeaders
+            $this->_soapOutputHeaders
         );
 
         // Reset non-permanent input headers

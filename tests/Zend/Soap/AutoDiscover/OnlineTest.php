@@ -54,9 +54,9 @@ class Zend_Soap_AutoDiscover_OnlineTest extends PHPUnit\Framework\TestCase
         $ret    = $client->request($b);
 
         $this->assertInternalType('array', $ret);
-        $this->assertEquals(1, count($ret));
+        $this->assertCount(1, $ret);
         $this->assertInternalType('array', $ret[0]->baz);
-        $this->assertEquals(3, count($ret[0]->baz));
+        $this->assertCount(3, $ret[0]->baz);
 
         $baz = $ret[0]->baz;
         $this->assertEquals('bar', $baz[0]->bar);

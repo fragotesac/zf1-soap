@@ -47,7 +47,7 @@ class Zend_Soap_WsdlTest extends PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             $this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>' .
+            '<?xml version="1.0"?>' .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                  . 'xmlns:tns="http://localhost/MyService.php" '
                                  . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
@@ -65,7 +65,7 @@ class Zend_Soap_WsdlTest extends PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             $this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>' .
+            '<?xml version="1.0"?>' .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                  . 'xmlns:tns="http://localhost/MyNewService.php" '
                                  . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
@@ -89,7 +89,7 @@ class Zend_Soap_WsdlTest extends PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             $this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>' .
+            '<?xml version="1.0"?>' .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
                                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
@@ -114,7 +114,7 @@ class Zend_Soap_WsdlTest extends PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             $this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>' .
+            '<?xml version="1.0"?>' .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
                                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
@@ -139,7 +139,7 @@ class Zend_Soap_WsdlTest extends PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             $this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>' .
+            '<?xml version="1.0"?>' .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
                                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
@@ -172,7 +172,7 @@ class Zend_Soap_WsdlTest extends PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             $this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>' .
+            '<?xml version="1.0"?>' .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
                                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
@@ -196,21 +196,21 @@ class Zend_Soap_WsdlTest extends PHPUnit\Framework\TestCase
         $wsdl->addBindingOperation($binding, 'operation1');
         $wsdl->addBindingOperation(
             $binding,
-                                   'operation2',
-                                   array('use' => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/'),
-                                   array('use' => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/')
+            'operation2',
+            array('use' => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/'),
+            array('use' => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/')
                                   );
         $wsdl->addBindingOperation(
             $binding,
-                                   'operation3',
-                                   array('use'  => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/'),
-                                   array('use'  => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/'),
-                                   array('name' => 'MyFault', 'use' => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/')
+            'operation3',
+            array('use'  => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/'),
+            array('use'  => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/'),
+            array('name' => 'MyFault', 'use' => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/')
                                    );
 
         $this->assertEquals(
             $this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>' .
+            '<?xml version="1.0"?>' .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
                                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
@@ -257,14 +257,14 @@ class Zend_Soap_WsdlTest extends PHPUnit\Framework\TestCase
         $wsdl->addBindingOperation($binding, 'operation1');
         $wsdl->addBindingOperation(
             $binding,
-                                   'operation2',
-                                   array('use' => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/'),
-                                   array('use' => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/')
+            'operation2',
+            array('use' => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/'),
+            array('use' => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/')
                                   );
 
         $this->assertEquals(
             $this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>' .
+            '<?xml version="1.0"?>' .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
                                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
@@ -298,14 +298,14 @@ class Zend_Soap_WsdlTest extends PHPUnit\Framework\TestCase
         $wsdl1->addBindingOperation($binding, 'operation1');
         $wsdl1->addBindingOperation(
             $binding,
-                                   'operation2',
-                                   array('use' => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/'),
-                                   array('use' => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/')
+            'operation2',
+            array('use' => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/'),
+            array('use' => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/')
                                   );
 
         $this->assertEquals(
             $this->sanitizeWsdlXmlOutputForOsCompability($wsdl1->toXml()),
-                            '<?xml version="1.0"?>' .
+            '<?xml version="1.0"?>' .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
                                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
@@ -343,14 +343,14 @@ class Zend_Soap_WsdlTest extends PHPUnit\Framework\TestCase
         $wsdl->addBindingOperation($binding, 'operation1');
         $wsdl->addBindingOperation(
             $binding,
-                                   'operation2',
-                                   array('use' => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/'),
-                                   array('use' => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/')
+            'operation2',
+            array('use' => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/'),
+            array('use' => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/')
                                   );
 
         $this->assertEquals(
             $this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>' .
+            '<?xml version="1.0"?>' .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
                                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
@@ -386,7 +386,7 @@ class Zend_Soap_WsdlTest extends PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             $this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>' .
+            '<?xml version="1.0"?>' .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
                                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
@@ -415,7 +415,7 @@ class Zend_Soap_WsdlTest extends PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             $this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>' .
+            '<?xml version="1.0"?>' .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
                                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
@@ -468,7 +468,7 @@ class Zend_Soap_WsdlTest extends PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             $this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>' .
+            '<?xml version="1.0"?>' .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
                                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
@@ -488,7 +488,7 @@ class Zend_Soap_WsdlTest extends PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()),
-                            '<?xml version="1.0"?>' .
+            '<?xml version="1.0"?>' .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
                                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
@@ -509,7 +509,7 @@ class Zend_Soap_WsdlTest extends PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             $this->sanitizeWsdlXmlOutputForOsCompability($wsdlDump),
-                            '<?xml version="1.0"?>' .
+            '<?xml version="1.0"?>' .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
                                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
@@ -524,7 +524,7 @@ class Zend_Soap_WsdlTest extends PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             $this->sanitizeWsdlXmlOutputForOsCompability($dumpedContent),
-                            '<?xml version="1.0"?>' .
+            '<?xml version="1.0"?>' .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
                                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '
@@ -597,7 +597,7 @@ class Zend_Soap_WsdlTest extends PHPUnit\Framework\TestCase
             $wsdl->addType('Zend_Soap_Wsdl_Test');
             $wsdl->addType('Zend_Soap_Wsdl_Test');
             $types = $wsdl->getTypes();
-            $this->assertEquals(1, count($types));
+            $this->assertCount(1, $types);
             $this->assertEquals(array('Zend_Soap_Wsdl_Test'), $types);
         } catch (Zend_Soap_Wsdl_Exception $e) {
             $this->fail();
@@ -622,7 +622,7 @@ class Zend_Soap_WsdlTest extends PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             $this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
-                            '<?xml version="1.0"?>' .
+            '<?xml version="1.0"?>' .
                             '<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" '
                                . 'xmlns:tns="http://localhost/MyService.php" '
                                . 'xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" '

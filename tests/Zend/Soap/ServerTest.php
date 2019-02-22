@@ -697,8 +697,8 @@ class Zend_Soap_ServerTest extends PHPUnit\Framework\TestCase
 
         $localClient = new Zend_Soap_Server_TestLocalSoapClient(
             $server,
-                                                                null,
-                                                                array('location' => 'test://',
+            null,
+            array('location'                                                     => 'test://',
                                                                       'uri'      => 'http://framework.zend.com')
         );
 
@@ -851,7 +851,7 @@ class Zend_Soap_ServerTest extends PHPUnit\Framework\TestCase
 
         // Remove the following line when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 
