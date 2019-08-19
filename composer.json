@@ -16,9 +16,6 @@
         "diablomedia/zendframework1-server": "^1.0.0",
         "diablomedia/zendframework1-uri": "^1.0.0",
         "diablomedia/zendframework1-xml": "^1.0.0",
-        "ext-SimpleXML": "*",
-        "ext-dom": "*",
-        "ext-soap": "*",
         "php": ">=7.0.0"
     },
     "autoload": {
@@ -46,5 +43,10 @@
         "test-with-coverage": "phpunit --coverage-clover=clover.xml",
         "phpstan": "phpstan analyze -c phpstan.neon --no-progress --ansi",
         "style-check": "php-cs-fixer fix --dry-run -vv"
+    },
+    "suggest": {
+        "ext-SimpleXML": "Required for this component",
+        "ext-dom": "Required for this component",
+        "ext-soap": "Required for this component"
     }
 }
