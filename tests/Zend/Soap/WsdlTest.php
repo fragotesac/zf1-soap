@@ -199,14 +199,14 @@ class Zend_Soap_WsdlTest extends PHPUnit\Framework\TestCase
             'operation2',
             array('use' => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/'),
             array('use' => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/')
-                                  );
+        );
         $wsdl->addBindingOperation(
             $binding,
             'operation3',
             array('use'  => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/'),
             array('use'  => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/'),
             array('name' => 'MyFault', 'use' => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/')
-                                   );
+        );
 
         $this->assertEquals(
             $this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
@@ -260,7 +260,7 @@ class Zend_Soap_WsdlTest extends PHPUnit\Framework\TestCase
             'operation2',
             array('use' => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/'),
             array('use' => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/')
-                                  );
+        );
 
         $this->assertEquals(
             $this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),
@@ -301,7 +301,7 @@ class Zend_Soap_WsdlTest extends PHPUnit\Framework\TestCase
             'operation2',
             array('use' => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/'),
             array('use' => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/')
-                                  );
+        );
 
         $this->assertEquals(
             $this->sanitizeWsdlXmlOutputForOsCompability($wsdl1->toXml()),
@@ -346,7 +346,7 @@ class Zend_Soap_WsdlTest extends PHPUnit\Framework\TestCase
             'operation2',
             array('use' => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/'),
             array('use' => 'encoded', 'encodingStyle' => 'http://schemas.xmlsoap.org/soap/encoding/')
-                                  );
+        );
 
         $this->assertEquals(
             $this->sanitizeWsdlXmlOutputForOsCompability($wsdl->toXml()),

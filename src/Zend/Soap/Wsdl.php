@@ -141,7 +141,7 @@ class Zend_Soap_Wsdl
                     sprintf(
                         "Strategy with name '%s does not exist.",
                         $strategy
-                )
+                    )
                 );
             }
         }
