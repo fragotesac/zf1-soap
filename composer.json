@@ -10,7 +10,7 @@
     "license": "BSD-3-Clause",
     "prefer-stable": true,
     "require": {
-        "diablomedia/zendframework1-config": "^1.0.0",
+        "diablomedia/zendframework1-config": "^1.0.0 || ^2.0.0",
         "diablomedia/zendframework1-exception": "^1.0.0",
         "diablomedia/zendframework1-server": "^1.0.0",
         "diablomedia/zendframework1-uri": "^1.0.0",
