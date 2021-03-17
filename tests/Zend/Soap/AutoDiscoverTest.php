@@ -35,7 +35,7 @@ require_once '_files/commontypes.php';
  */
 class Zend_Soap_AutoDiscoverTest extends PHPUnit\Framework\TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         // This has to be done because some CLI setups don't have $_SERVER variables
         // to simuulate that we have an actual webserver.
@@ -316,10 +316,10 @@ class Zend_Soap_AutoDiscoverTest extends PHPUnit\Framework\TestCase
         $dom->loadXML(ob_get_clean());
 
         $dom->save(dirname(__FILE__) . '/_files/setclass.wsdl');
-        $this->assertContains('<message name="testFunc1Out"><part name="return"', $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()));
-        $this->assertContains('<message name="testFunc2Out"><part name="return"', $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()));
-        $this->assertContains('<message name="testFunc3Out"><part name="return"', $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()));
-        $this->assertContains('<message name="testFunc4Out"><part name="return"', $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()));
+        $this->assertStringContainsString('<message name="testFunc1Out"><part name="return"', $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()));
+        $this->assertStringContainsString('<message name="testFunc2Out"><part name="return"', $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()));
+        $this->assertStringContainsString('<message name="testFunc3Out"><part name="return"', $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()));
+        $this->assertStringContainsString('<message name="testFunc4Out"><part name="return"', $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()));
 
         unlink(dirname(__FILE__) . '/_files/setclass.wsdl');
     }
@@ -437,8 +437,8 @@ class Zend_Soap_AutoDiscoverTest extends PHPUnit\Framework\TestCase
         $name  = $parts[0];
 
         $wsdl = $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML());
-        $this->assertContains('<message name="Zend_Soap_AutoDiscover_TestFuncOut"><part name="return" type="xsd:string"/>', $wsdl);
-        $this->assertNotContains('<message name="Zend_Soap_AutoDiscover_TestFuncOut"><part name="Zend_Soap_AutoDiscover_TestFuncReturn"', $wsdl);
+        $this->assertStringContainsString('<message name="Zend_Soap_AutoDiscover_TestFuncOut"><part name="return" type="xsd:string"/>', $wsdl);
+        $this->assertStringNotContainsString('<message name="Zend_Soap_AutoDiscover_TestFuncOut"><part name="Zend_Soap_AutoDiscover_TestFuncReturn"', $wsdl);
         $this->assertTrue($dom->schemaValidate(dirname(__FILE__) . '/schemas/wsdl.xsd'), 'WSDL Did not validate');
 
         unlink(dirname(__FILE__) . '/_files/addfunction.wsdl');
@@ -566,7 +566,7 @@ class Zend_Soap_AutoDiscoverTest extends PHPUnit\Framework\TestCase
         $server->handle();
         $wsdlOutput = ob_get_clean();
 
-        $this->assertContains($httpsScriptUri, $wsdlOutput);
+        $this->assertStringContainsString($httpsScriptUri, $wsdlOutput);
     }
 
     /**
@@ -583,8 +583,8 @@ class Zend_Soap_AutoDiscoverTest extends PHPUnit\Framework\TestCase
         $server->handle();
         $wsdlOutput = ob_get_clean();
 
-        $this->assertNotContains($scriptUri, $wsdlOutput);
-        $this->assertContains('http://example.com/service.php', $wsdlOutput);
+        $this->assertStringNotContainsString($scriptUri, $wsdlOutput);
+        $this->assertStringContainsString('http://example.com/service.php', $wsdlOutput);
     }
 
     /**
@@ -602,8 +602,8 @@ class Zend_Soap_AutoDiscoverTest extends PHPUnit\Framework\TestCase
         $server->handle();
         $wsdlOutput = ob_get_clean();
 
-        $this->assertNotContains($scriptUri, $wsdlOutput);
-        $this->assertContains('http://example.com/service.php', $wsdlOutput);
+        $this->assertStringNotContainsString($scriptUri, $wsdlOutput);
+        $this->assertStringContainsString('http://example.com/service.php', $wsdlOutput);
     }
 
     public function testSetNonStringNonZendUriUriThrowsException()
@@ -628,8 +628,8 @@ class Zend_Soap_AutoDiscoverTest extends PHPUnit\Framework\TestCase
         $server->handle();
         $wsdlOutput = ob_get_clean();
 
-        $this->assertNotContains($scriptUri, $wsdlOutput);
-        $this->assertContains('http://example.com/service.php', $wsdlOutput);
+        $this->assertStringNotContainsString($scriptUri, $wsdlOutput);
+        $this->assertStringContainsString('http://example.com/service.php', $wsdlOutput);
 
         $server->setUri('http://example2.com/service2.php');
 
@@ -637,9 +637,9 @@ class Zend_Soap_AutoDiscoverTest extends PHPUnit\Framework\TestCase
         $server->handle();
         $wsdlOutput = ob_get_clean();
 
-        $this->assertNotContains($scriptUri, $wsdlOutput);
-        $this->assertNotContains('http://example.com/service.php', $wsdlOutput);
-        $this->assertContains('http://example2.com/service2.php', $wsdlOutput);
+        $this->assertStringNotContainsString($scriptUri, $wsdlOutput);
+        $this->assertStringNotContainsString('http://example.com/service.php', $wsdlOutput);
+        $this->assertStringContainsString('http://example2.com/service2.php', $wsdlOutput);
     }
 
     /**
@@ -709,35 +709,35 @@ class Zend_Soap_AutoDiscoverTest extends PHPUnit\Framework\TestCase
         $_SERVER = array('REQUEST_URI' => '/my_script.php?wsdl', 'HTTP_HOST' => 'localhost');
         $server  = new Zend_Soap_AutoDiscover();
         $uri     = $server->getUri()->getUri();
-        $this->assertNotContains('?wsdl', $uri);
+        $this->assertStringNotContainsString('?wsdl', $uri);
         $this->assertEquals('http://localhost/my_script.php', $uri);
 
         // Apache plus SSL
         $_SERVER = array('REQUEST_URI' => '/my_script.php?wsdl', 'HTTP_HOST' => 'localhost', 'HTTPS' => 'on');
         $server  = new Zend_Soap_AutoDiscover();
         $uri     = $server->getUri()->getUri();
-        $this->assertNotContains('?wsdl', $uri);
+        $this->assertStringNotContainsString('?wsdl', $uri);
         $this->assertEquals('https://localhost/my_script.php', $uri);
 
         // IIS 5 + PHP as FastCGI
         $_SERVER = array('ORIG_PATH_INFO' => '/my_script.php?wsdl', 'SERVER_NAME' => 'localhost');
         $server  = new Zend_Soap_AutoDiscover();
         $uri     = $server->getUri()->getUri();
-        $this->assertNotContains('?wsdl', $uri);
+        $this->assertStringNotContainsString('?wsdl', $uri);
         $this->assertEquals('http://localhost/my_script.php', $uri);
 
         // IIS with ISAPI_Rewrite
         $_SERVER = array('HTTP_X_REWRITE_URL' => '/my_script.php?wsdl', 'SERVER_NAME' => 'localhost');
         $server  = new Zend_Soap_AutoDiscover();
         $uri     = $server->getUri()->getUri();
-        $this->assertNotContains('?wsdl', $uri);
+        $this->assertStringNotContainsString('?wsdl', $uri);
         $this->assertEquals('http://localhost/my_script.php', $uri);
 
         // IIS with Microsoft Rewrite Module
         $_SERVER = array('HTTP_X_ORIGINAL_URL' => '/my_script.php?wsdl', 'SERVER_NAME' => 'localhost');
         $server  = new Zend_Soap_AutoDiscover();
         $uri     = $server->getUri()->getUri();
-        $this->assertNotContains('?wsdl', $uri);
+        $this->assertStringNotContainsString('?wsdl', $uri);
         $this->assertEquals('http://localhost/my_script.php', $uri);
     }
 
@@ -863,7 +863,7 @@ class Zend_Soap_AutoDiscoverTest extends PHPUnit\Framework\TestCase
         $autodiscover->setClass('Zend_Soap_AutoDiscover_Test');
         $wsdl = $autodiscover->toXml();
 
-        $this->assertContains('http://example.com/?a=b&amp;b=c', $wsdl);
+        $this->assertStringContainsString('http://example.com/?a=b&amp;b=c', $wsdl);
     }
 
     /**
@@ -875,7 +875,7 @@ class Zend_Soap_AutoDiscoverTest extends PHPUnit\Framework\TestCase
         $autodiscover->setClass('Zend_Soap_AutoDiscover_NoReturnType');
         $wsdl = $autodiscover->toXml();
 
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<operation name="pushOneWay"><documentation>@param string $message</documentation><input message="tns:pushOneWayIn"/></operation>',
             $wsdl
         );
@@ -890,7 +890,7 @@ class Zend_Soap_AutoDiscoverTest extends PHPUnit\Framework\TestCase
         $autodiscover->addFunction('Zend_Soap_AutoDiscover_OneWay');
         $wsdl = $autodiscover->toXml();
 
-        $this->assertContains(
+        $this->assertStringContainsString(
             '<operation name="Zend_Soap_AutoDiscover_OneWay"><documentation>@param string $message</documentation><input message="tns:Zend_Soap_AutoDiscover_OneWayIn"/></operation>',
             $wsdl
         );

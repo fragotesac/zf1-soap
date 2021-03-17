@@ -694,7 +694,7 @@ class Zend_Soap_WsdlTest extends PHPUnit\Framework\TestCase
     public function testHtmlAmpersandInUrlInConstructorIsEncodedCorrectly()
     {
         $wsdl = new Zend_Soap_Wsdl('MyService', self::URI_WITH_EXPANDED_AMP);
-        $this->assertContains(self::URI_WITH_EXPANDED_AMP, $wsdl->toXML());
+        $this->assertStringContainsString(self::URI_WITH_EXPANDED_AMP, $wsdl->toXML());
     }
 
     /**
@@ -704,7 +704,7 @@ class Zend_Soap_WsdlTest extends PHPUnit\Framework\TestCase
     {
         $wsdl = new Zend_Soap_Wsdl('MyService', 'http://example.com');
         $wsdl->setUri(self::URI_WITH_EXPANDED_AMP);
-        $this->assertContains(self::URI_WITH_EXPANDED_AMP, $wsdl->toXML());
+        $this->assertStringContainsString(self::URI_WITH_EXPANDED_AMP, $wsdl->toXML());
     }
 }
 

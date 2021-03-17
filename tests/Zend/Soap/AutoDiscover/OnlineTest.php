@@ -34,7 +34,7 @@ class Zend_Soap_AutoDiscover_OnlineTest extends PHPUnit\Framework\TestCase
 {
     protected $baseuri;
 
-    public function setUp()
+    public function setUp(): void
     {
         if (!defined('TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI') || constant('TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI') == false) {
             $this->markTestSkipped('The constant TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI has to be defined to allow the Online test to work.');
@@ -53,9 +53,9 @@ class Zend_Soap_AutoDiscover_OnlineTest extends PHPUnit\Framework\TestCase
         $client = new Zend_Soap_Client($wsdl);
         $ret    = $client->request($b);
 
-        $this->assertInternalType('array', $ret);
+        $this->assertIsArray($ret);
         $this->assertCount(1, $ret);
-        $this->assertInternalType('array', $ret[0]->baz);
+        $this->assertIsArray($ret[0]->baz);
         $this->assertCount(3, $ret[0]->baz);
 
         $baz = $ret[0]->baz;
