@@ -62,6 +62,7 @@ if (extension_loaded('soap')) {
          * @param int    $one_way
          * @return mixed
          */
+        #[\ReturnTypeWillChange]
         public function __doRequest($request, $location, $action, $version, $one_way = null)
         {
             if ($one_way === null) {
