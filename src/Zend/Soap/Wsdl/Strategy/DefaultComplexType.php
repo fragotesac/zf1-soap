@@ -64,7 +64,7 @@ class Zend_Soap_Wsdl_Strategy_DefaultComplexType extends Zend_Soap_Wsdl_Strategy
                  * @todo check if 'xsd:element' must be used here (it may not be compatible with using 'complexType'
                  * node for describing other classes used as attribute types for current class
                  */
-                $element = $dom->createElement('xsd:element');
+                $element                                     = $dom->createElement('xsd:element');
                 $element->setAttribute('name', $propertyName = $property->getName());
                 $element->setAttribute('type', $this->getContext()->getType(trim($matches[1][0])));
 

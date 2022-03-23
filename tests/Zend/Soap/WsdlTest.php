@@ -484,7 +484,7 @@ class Zend_Soap_WsdlTest extends PHPUnit\Framework\TestCase
         $wsdl = new Zend_Soap_Wsdl('MyService', 'http://localhost/MyService.php');
         $dom  = $wsdl->toDomDocument();
 
-        $this->assertTrue($dom instanceof DOMDocument);
+        $this->assertInstanceOf(DOMDocument::class, $dom);
 
         $this->assertEquals(
             $this->sanitizeWsdlXmlOutputForOsCompability($dom->saveXML()),

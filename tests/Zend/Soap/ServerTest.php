@@ -798,7 +798,7 @@ class Zend_Soap_ServerTest extends PHPUnit\Framework\TestCase
         $server = new Zend_Soap_Server();
         $fault  = $server->fault('Faultmessage!');
 
-        $this->assertTrue($fault instanceof SOAPFault);
+        $this->assertInstanceOf(SOAPFault::class, $fault);
         $this->assertStringContainsString('Faultmessage!', $fault->getMessage());
     }
 
@@ -807,7 +807,7 @@ class Zend_Soap_ServerTest extends PHPUnit\Framework\TestCase
         $server = new Zend_Soap_Server();
         $fault  = $server->fault(new Exception('MyException'));
 
-        $this->assertTrue($fault instanceof SOAPFault);
+        $this->assertInstanceOf(SOAPFault::class, $fault);
         $this->assertStringContainsString('Unknown error', $fault->getMessage());
         $this->assertStringNotContainsString('MyException', $fault->getMessage());
     }
@@ -818,7 +818,7 @@ class Zend_Soap_ServerTest extends PHPUnit\Framework\TestCase
         $server->registerFaultException('Exception');
         $fault = $server->fault(new Exception('MyException'));
 
-        $this->assertTrue($fault instanceof SOAPFault);
+        $this->assertInstanceOf(SOAPFault::class, $fault);
         $this->assertStringNotContainsString('Unknown error', $fault->getMessage());
         $this->assertStringContainsString('MyException', $fault->getMessage());
     }
@@ -839,7 +839,7 @@ class Zend_Soap_ServerTest extends PHPUnit\Framework\TestCase
         $server = new Zend_Soap_Server();
         $fault  = $server->fault('Faultmessage!', 5000);
 
-        $this->assertTrue($fault instanceof SOAPFault);
+        $this->assertInstanceOf(SOAPFault::class, $fault);
     }
 
     /**
