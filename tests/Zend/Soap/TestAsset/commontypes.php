@@ -598,7 +598,7 @@ class Zend_Soap_TestAsset_ServerTestClass
 
 if (extension_loaded('soap')) {
 
-/** Local SOAP client */
+    /** Local SOAP client */
     class Zend_Soap_TestAsset_TestLocalSoapClient extends SoapClient
     {
         /**

@@ -22,19 +22,19 @@
 
 if (extension_loaded('soap')) {
 
-/**
- * Zend_Soap_Client_Local
- *
- * Class is intended to be used with .Net Web Services.
- *
- * Important! Class is at experimental stage now.
- * Please leave your notes, compatiblity issues reports or
- * suggestions in fw-webservices@lists.zend.com or fw-general@lists.com
- *
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage Client
- */
+    /**
+     * Zend_Soap_Client_Local
+     *
+     * Class is intended to be used with .Net Web Services.
+     *
+     * Important! Class is at experimental stage now.
+     * Please leave your notes, compatiblity issues reports or
+     * suggestions in fw-webservices@lists.zend.com or fw-general@lists.com
+     *
+     * @category   Zend
+     * @package    Zend_Soap
+     * @subpackage Client
+     */
     class Zend_Soap_Client_DotNet extends Zend_Soap_Client
     {
         /**
@@ -64,7 +64,7 @@ if (extension_loaded('soap')) {
         {
             if (count($arguments) > 1 ||
             (count($arguments) == 1 && !is_array(reset($arguments)))
-           ) {
+            ) {
                 throw new Zend_Soap_Client_Exception('.Net webservice arguments have to be grouped into array: array(\'a\' => $a, \'b\' => $b, ...).');
             }
 

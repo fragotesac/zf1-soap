@@ -257,10 +257,10 @@ class Zend_Soap_Client
                     $this->setExceptions($value);
                     break;
 
-                // Not used now
-                // case 'connection_timeout':
-                //     $this->_connection_timeout = $value;
-                //    break;
+                    // Not used now
+                    // case 'connection_timeout':
+                    //     $this->_connection_timeout = $value;
+                    //    break;
 
                 default:
                     throw new Zend_Soap_Client_Exception('Unknown SOAP client option');
@@ -1123,7 +1123,7 @@ class Zend_Soap_Client
             $name,
             $this->_preProcessArguments($arguments),
             null, /* Options are already set to the SOAP client object */
-                                                 (count($soapHeaders) > 0)? $soapHeaders : null,
+            (count($soapHeaders) > 0)? $soapHeaders : null,
             $this->_soapOutputHeaders
         );
 

@@ -553,7 +553,7 @@ class Zend_Soap_Wsdl
             default:
                 // delegate retrieval of complex type to current strategy
                 return $this->addComplexType($type);
-            }
+        }
     }
 
     /**

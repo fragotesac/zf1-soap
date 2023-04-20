@@ -5,7 +5,3 @@ parameters:
     excludePaths:
         - %rootDir%/../../../vendor/*
         - %rootDir%/../../../tests/*
-    ignoreErrors:
-        # Not sure what default should be
-        - '#Variable \$xml might not be defined\.#'
-        - '#Variable \$complexTypeName might not be defined\.#'

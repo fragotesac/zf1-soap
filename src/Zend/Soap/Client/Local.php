@@ -22,18 +22,18 @@
 
 if (extension_loaded('soap')) {
 
-/**
- * Zend_Soap_Client_Local
- *
- * Class is intended to be used as local SOAP client which works
- * with a provided Server object.
- *
- * Could be used for development or testing purposes.
- *
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage Client
- */
+    /**
+     * Zend_Soap_Client_Local
+     *
+     * Class is intended to be used as local SOAP client which works
+     * with a provided Server object.
+     *
+     * Could be used for development or testing purposes.
+     *
+     * @category   Zend
+     * @package    Zend_Soap
+     * @subpackage Client
+     */
     class Zend_Soap_Client_Local extends Zend_Soap_Client
     {
         /**

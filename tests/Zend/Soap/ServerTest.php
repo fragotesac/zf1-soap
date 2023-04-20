@@ -993,7 +993,7 @@ class Zend_Soap_ServerTest extends PHPUnit\Framework\TestCase
 
 if (extension_loaded('soap')) {
 
-/** Local SOAP client */
+    /** Local SOAP client */
     class Zend_Soap_Server_TestLocalSoapClient extends SoapClient
     {
         /**

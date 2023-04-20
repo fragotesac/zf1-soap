@@ -23,11 +23,11 @@
 
 if (extension_loaded('soap')) {
 
-/**
- * @category   Zend
- * @package    Zend_Soap
- * @subpackage Client
- */
+    /**
+     * @category   Zend
+     * @package    Zend_Soap
+     * @subpackage Client
+     */
     class Zend_Soap_Client_Common extends SoapClient
     {
         /**
